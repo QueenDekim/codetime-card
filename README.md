@@ -69,6 +69,14 @@ The `top_n` parameter is used to indicate the number of languages
   src="https://codetime-card.vercel.app/?userID=34502&type=languages&top_n=5"
 />
 
+>Language icons are specified in svg format in the `src/language-icons.js` file
+You can generate a preview of the icons by running the command
+```sh
+nodemon src/generate-svg-list.js
+```
+>The final preview will be in the file `icons/icons.svg`
+
+
 You must provide a valid `userID`. Additionally, Codetime Card supports
 several options (with their default values):
 ```js
@@ -140,7 +148,7 @@ You can also use [GitHub's new media feature](https://github.blog/changelog/2022
 
 Start
 ```sh
-npm run start
+nodemon index.js # or npm run start
 ```
 and point a browser to
 
