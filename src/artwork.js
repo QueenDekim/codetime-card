@@ -1,4 +1,3 @@
-// artwork.js
 export const timeIcon = (size) =>
   `<svg width="${size}" height="${size}" viewBox="0 0 24 24">
     <circle cx="13.5" cy="13.5" r="5" />

@@ -1,4 +1,3 @@
-// codetime-card.js
 import { timeIcon, sourceCodeIcon, codetimeLogo } from "./artwork.js";
 import { themes } from "./themes.js";
 
@@ -17,7 +16,7 @@ const statLine = (icon, iconColor, label, value, xOffset = 0) => {
   return `
     ${showIcons ? `<g transform="translate(${xOffset}, 0)" fill="${iconColor}">${icon}</g>` : ''}
     <text ${labelOffset} y="12.5">${label}:</text>
-    <text x="${160 + xOffset}" y="12.5" text-anchor="end">${value}</text>
+    <text x="${150 + xOffset}" y="12.5" text-anchor="end">${value}</text>
   `;
 };
 
@@ -128,8 +127,7 @@ export const CodetimeLanguagesCard = async (
 
   const width = 245;
   const lineHeight = 20;
-  const baseHeight = showLogo ? 140 : 100;
-  // Динамически рассчитываем высоту на основе количества языков
+  const baseHeight = showLogo ? 65 : 45;
   const height = baseHeight + (data.entries.length * lineHeight);
 
   let logoSvg;
