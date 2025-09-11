@@ -103,5 +103,5 @@ http
     res.end();
   })
   .listen(process.env.PORT || 3000, function () {
-    console.log("server start at port 3000");
+    console.log(`server start at port ${process.env.PORT || 3000}`);
   });

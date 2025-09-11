@@ -17,7 +17,7 @@ const statLine = (icon, iconColor, label, value, xOffset = 0) => {
   return `
     ${showIcons ? `<g transform="translate(${xOffset}, 0)" fill="${iconColor}">${icon}</g>` : ''}
     <text ${labelOffset} y="12.5">${label}:</text>
-    <text x="${150 + xOffset}" y="12.5" text-anchor="end">${value}</text>
+    <text x="${195 + xOffset}" y="12.5" text-anchor="end">${value}</text>
   `;
 };
 
@@ -155,17 +155,16 @@ export const CodetimeLanguagesCard = async (
   
   const iconSize = 16;
   
-  // Получаем иконку для текущего языка или используем иконку по умолчанию
   const langIconSvg = showIcons
       ? languageIcons[entry.language.toLowerCase()]?.(iconSize) || languageIcons.default(iconSize)
       : null;
   
   const line = statLine(
-      langIconSvg, // Передаем соответствующую иконку
+      langIconSvg,
       colors.icon,
       entry.language,
       formatTime(entry.totalMinutes),
-      0 // Убираем смещение для первого элемента
+      0
   );
   linesStr += `
       <g ${anim} transform="translate(25, ${yOffset + i * lineHeight})">

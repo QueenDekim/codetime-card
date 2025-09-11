@@ -5,7 +5,6 @@ export const themes = {
     border: "#44475a",
     logo: "#f8f8f2",
     icon: "#f8f8f2",
-    // icon: "#8be9fd",
   },
   gruvboxdark: {
     background: "#282828",
