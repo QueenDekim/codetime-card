@@ -1,4 +1,5 @@
 import { timeIcon, sourceCodeIcon, codetimeLogo } from "./artwork.js";
+import { languageIcons } from "./language-icons.js";
 import { themes } from "./themes.js";
 
 function formatTime(minutes) {
@@ -148,19 +149,27 @@ export const CodetimeLanguagesCard = async (
   const yOffset = showLogo ? 55 : 0;
   
   data.entries.forEach((entry, i) => {
-    const anim = showAnimations
+  const anim = showAnimations
       ? `class="fadein" style="animation-delay: ${300 + i * 200}ms"`
       : "";
-    const line = statLine(
-      i === 0 ? langIconSvg : null,
+  
+  const iconSize = 16;
+  
+  // Получаем иконку для текущего языка или используем иконку по умолчанию
+  const langIconSvg = showIcons
+      ? languageIcons[entry.language.toLowerCase()]?.(iconSize) || languageIcons.default(iconSize)
+      : null;
+  
+  const line = statLine(
+      langIconSvg, // Передаем соответствующую иконку
       colors.icon,
       entry.language,
       formatTime(entry.totalMinutes),
-      i === 0 ? 0 : 25
-    );
-    linesStr += `
+      0 // Убираем смещение для первого элемента
+  );
+  linesStr += `
       <g ${anim} transform="translate(25, ${yOffset + i * lineHeight})">
-        ${line}
+      ${line}
       </g>`;
   });
 
