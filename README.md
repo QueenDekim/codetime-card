@@ -110,6 +110,14 @@ You can use [GitHub's theme context](https://github.blog/changelog/2021-11-24-sp
 [![Codetime Card Dark](https://codetime-card.vercel.app/?userID=34502&theme=dracula#gh-dark-mode-only)](https://codetime-card.vercel.app/?userID=34502&theme=dracula#gh-dark-mode-only)
 ```
 
+<details>
+<summary>Show example</summary>
+
+[![Codetime Card Light](https://codetime-card.vercel.app/?userID=34502&theme=tomorrow#gh-light-mode-only)](https://codetime-card.vercel.app/?userID=34502&theme=tomorrow#gh-light-mode-only)
+[![Codetime Card Dark](https://codetime-card.vercel.app/?userID=34502&theme=dracula#gh-dark-mode-only)](https://codetime-card.vercel.app/?userID=34502&theme=dracula#gh-dark-mode-only)
+
+</details>
+
 #### Use GitHub's new media feature
 
 You can also use [GitHub's new media feature](https://github.blog/changelog/2022-05-19-specify-theme-context-for-images-in-markdown-beta/) in HTML to control how cards appear in light or dark themes.
