@@ -69,7 +69,7 @@ The `top_n` parameter is used to indicate the number of languages
   src="https://codetime-card.vercel.app/?userID=34502&type=languages&top_n=5"
 />
 
->Language icons are specified in svg format in the `src/language-icons.js` file
+>Language icons are specified in svg format in the `src/language-icons.js` file<br>
 You can generate a preview of the icons by running the command
 ```sh
 nodemon src/generate-svg-list.js
