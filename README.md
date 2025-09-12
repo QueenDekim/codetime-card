@@ -8,7 +8,7 @@ Get dynamically generated Codetime stats for your README files.
 - Run the following command in the terminal:
     ```sh
     curl https://api.codetime.dev/v3/users/self \
-    --header 'Authorization: Bearer YOUR_TOKEN'
+        --header 'Authorization: Bearer YOUR_TOKEN'
     ```
 
     We need the `id` from the response
