@@ -8,7 +8,7 @@ Get dynamically generated Codetime stats for your README files.
 - Run the following command in the terminal:
     ```sh
     curl https://api.codetime.dev/v3/users/self \
-        --header 'Authorization: Bearer YOUR_TOKEN'
+    --header 'Authorization: Bearer YOUR_TOKEN'
     ```
 
     We need the `id` from the response
@@ -67,6 +67,22 @@ The `top_n` parameter is used to indicate the number of languages
 
 <img height="180px"
   src="https://codetime-card.vercel.app/?userID=34502&type=languages&top_n=5"
+/>
+
+You can get combined card using the `type=combined` parameter:
+
+```html
+<img height="180px"
+  src="https://codetime-card.vercel.app/?userID=34502&type=combined"
+/>
+```
+
+```md
+![Codetime Languages Card](https://codetime-card.vercel.app/?userID=34502&type=combined)
+```
+
+<img height="180px"
+  src="https://codetime-card.vercel.app/?userID=34502&type=combined"
 />
 
 >Language icons are specified in svg format in the `src/language-icons.js` file<br>
