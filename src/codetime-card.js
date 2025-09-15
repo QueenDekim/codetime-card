@@ -207,3 +207,146 @@ export const CodetimeLanguagesCard = async (
     </svg>
   `;
 };
+
+export const CodetimeCombinedCard = async (
+  data7,
+  data30,
+  data90,
+  langData,
+  showLogo,
+  showBorder,
+  showIcons,
+  showAnimations,
+  theme,
+  langDays = 30
+) => {
+  theme = theme.replace(/\W/g, "").toLowerCase();
+  let colors;
+  if (theme in themes) {
+    colors = themes[theme];
+  } else {
+    colors = themes["tomorrow"];
+  }
+
+  const columnWidth = 245;
+  const totalWidth = columnWidth * 2 + 1;
+  const timeHeight = showLogo ? 140 : 100;
+  const langHeight = showLogo ? 65 + (langData.entries.length * 20) : 65 + (langData.entries.length * 20);
+  const totalHeight = Math.max(timeHeight, langHeight);
+
+  let logoSvg;
+  if (showLogo) {
+    logoSvg = `
+      <g transform="translate(14, 15)">
+        ${codetimeLogo(colors.logo, 20)}
+        <text x="130" y="21" font-size="10">for ${data7.username}</text>
+      </g>`;
+  }
+
+  const iconSize = 16;
+  const timeIconSvg = showIcons ? timeIcon(iconSize) : null;
+  const langIconSvg = showIcons ? sourceCodeIcon(iconSize) : null;
+
+  // Time content
+  const timeLines = [
+    statLine(timeIconSvg, colors.icon, "Last 7 days", formatTime(data7.totalMinutes)),
+    statLine(timeIconSvg, colors.icon, "Last 30 days", formatTime(data30.totalMinutes)),
+    statLine(timeIconSvg, colors.icon, "Last 90 days", formatTime(data90.totalMinutes)),
+  ];
+
+  let timeContent = ``;
+  const timeYOffset = showLogo ? 55 : 0;
+  for (let i = 0; i < timeLines.length; i++) {
+    const anim = showAnimations
+      ? `class="fadein" style="animation-delay: ${300 + i * 200}ms"`
+      : "";
+    timeContent += `
+      <g ${anim} transform="translate(25, ${timeYOffset + i * 20})">
+        ${timeLines[i]}
+      </g>`;
+  }
+
+  // Languages content
+  let langContent = ``;
+  const langYOffset = showLogo ? 55 : 45;
+  
+  langData.entries.forEach((entry, i) => {
+    const anim = showAnimations
+      ? `class="fadein" style="animation-delay: ${300 + i * 200}ms"`
+      : "";
+    
+    const langIconSvg = showIcons
+      ? languageIcons[entry.language.toLowerCase()]?.(iconSize) || languageIcons.default(iconSize)
+      : null;
+    
+    const line = statLine(
+      langIconSvg,
+      colors.icon,
+      entry.language,
+      formatTime(entry.totalMinutes),
+      0
+    );
+    langContent += `
+      <g ${anim} transform="translate(25, ${langYOffset + i * 20})">
+        ${line}
+      </g>`;
+  });
+
+  // Separator line with padding
+  const separator = `<line x1="${columnWidth}" y1="15" x2="${columnWidth}" y2="${totalHeight - 15}" stroke="${colors.border}" stroke-opacity="0.5" />`;
+
+  // Language period text
+  let langPeriodText = '';
+  if (showLogo) {
+    langPeriodText = `
+      <g transform="translate(14, 15)">
+        <text x="145" y="21" font-size="10">Last ${langDays} days</text>
+      </g>`;
+  } else {
+    langPeriodText = `<text x="20" y="35" font-size="15">Top languages (last ${langDays} days)</text>`;
+  }
+
+  return `
+    <svg
+     width="${totalWidth}"
+     height="${totalHeight}"
+     viewBox="0 0 ${totalWidth} ${totalHeight}"
+     xmlns="http://www.w3.org/2000/svg"
+     font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Liberation Sans,sans-serif"
+     font-size="12"
+     fill="${colors.foreground}"
+     font-weight="bold"
+    >
+      <style>
+        .fadein {
+          animation: fadeInAnimation 0.8s ease-in-out forwards;
+          opacity: 0;
+        }
+        @keyframes fadeInAnimation {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+      </style>
+
+      <rect
+       fill="${colors.background}"
+       width="${totalWidth}"
+       height="${totalHeight}"
+       stroke="${colors.border}"
+       stroke-opacity="${showBorder ? 1 : 0}"
+       rx="4.5"
+      />
+      ${showLogo ? logoSvg : ''}
+      ${separator}
+      <!-- Time column -->
+      <g transform="translate(0, 0)">
+        ${timeContent}
+      </g>
+      <!-- Languages column -->
+      <g transform="translate(${columnWidth + 10}, 0)">
+        ${langPeriodText}
+        ${langContent}
+      </g>
+    </svg>
+  `;
+};
